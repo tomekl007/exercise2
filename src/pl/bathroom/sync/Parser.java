@@ -7,23 +7,33 @@ import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * 
+ * @author Tomasz Lelek
+ * Parsing input file 
+ */
 final public class Parser {
 	
-	static int sequence;
+	private static int sequence;
 	static boolean firstLine=true;
-	static List<String> women=new LinkedList<>();
-	static List<String> men=new LinkedList<>();
-	static int nrOfThreads;
+	static boolean didFirstEmployee=true;
 	
-	static List<String> employees=new LinkedList<>();
+	private static int nrOfThreads;
 	
+	private static List<String> employees=new LinkedList<>();
+	
+	private static String firstEmployee;
+	
+	/**
+	 * Static method that parse file
+	 * @param inputPath - path of file being parsed
+	 */
 	static void parse(String inputPath){
 			
 			
 	
 	  try{
-		  // Open the file that is the first 
-		  // command line parameter
+		 
 		  FileInputStream fstream = new FileInputStream(inputPath);
 		  // Get the object of DataInputStream
 		  DataInputStream in = new DataInputStream(fstream);
@@ -35,15 +45,14 @@ final public class Parser {
 				  sequence=Integer.parseInt(strLine);
 				  firstLine=false;
 			  }else{
+			    if(didFirstEmployee){
+			    	firstEmployee=strLine;
+			        didFirstEmployee=false;
+			    }
+				  
 			
-			 // if(strLine.startsWith("m"))
-			//	  men.add(strLine);
-			//  else if(strLine.startsWith("k"))
-			//	  women.add(strLine);
-			  
-		  // Print the content on the console
 				  employees.add(strLine);
-		  System.out.println (strLine);
+	
 		  
 		  	nrOfThreads++;
 			  }
@@ -55,5 +64,21 @@ final public class Parser {
 		  System.err.println("Error: " + e.getMessage());
 		  }
 	
+	}
+	
+	public static String getFirstEmployee(){
+		return firstEmployee;
+	}
+	
+	public static int getNrOfThreads(){
+		return nrOfThreads;
+	}
+	
+	public static List<String> getEmplyeesList(){
+		return employees;
+	}
+	
+	public static int getSequence(){
+		return sequence;
 	}
 }

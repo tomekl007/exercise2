@@ -6,7 +6,7 @@ import java.util.Set;
 public class Employee implements Runnable {
 
 	
-	final static int timeOfBeeingInBathroom=1000;
+	final static int timeOfBeeingInBathroom=700;
 	final int number;
 	final String id;
 	final BoundedHashSet<String> b ;
@@ -19,12 +19,12 @@ public class Employee implements Runnable {
 	
 	@Override
 	public void run() {
-		System.out.println(number);
+	
 		try {
-			b.add(id);
-			//simulation of beeing in bathroom
+			b.add(id);//employee enter bathroom
+			//uncomment to simulation of employee being in bathroom by time = timeOfBeeingInBarhroom
 			Thread.sleep(timeOfBeeingInBathroom);
-			b.remove(id);
+			b.remove(id);//employee leave bathroom
 			
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
